@@ -2,9 +2,10 @@ const router = require('express').Router();
 const User = require('../model/User');
 const {register_validation, login_validation} = require('../validation');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 
-
+//Register
 router.post('/register',async (req, res) => {
 
     //Validate data
@@ -36,12 +37,34 @@ router.post('/register',async (req, res) => {
     });
     try{
         const savedUser = await user.save();
-        res.send(savedUser);
+        res.send({user: user._id});
     }catch(err){
         res.status(400).send(err);
     }
 });
 
+//Login
+router.post('/login',async (req,res) =>{
+    //Validate data
+    const {error} = login_validation(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
 
+    //User checking
+    const user = await User.findOne({nazwa_uzytkownika: req.body.nazwa_uzytkownika});
+    if(!user) return res.status(400).send("Username is not found");
+
+    //Password checking
+    const validPass = await bcrypt.compare(req.body.haslo, user.haslo);
+    if(!validPass) return res.status(400).send("Invalid passowrd");
+
+    //Create token
+    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    res.header('auth-token', token).send(token);
+
+
+    //res.send('Logged in!');
+
+
+});
 
 module.exports = router;
