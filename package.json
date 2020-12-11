@@ -1,7 +1,7 @@
 {
   "name": "tiwam",
   "version": "1.0.0",
-  "description": "## Zad 1 Pierwsze zadanie polega na zdefiniowaniu 3 loginu oraz hasła użytkowników posiadających dostęp do testowego systemu  Następnie zdefiniowanie 2 pol z możliwością wpisania loginu oraz hasła  Po tym jak użytkownik wprowadzi dane zdefiniowanego użytkownika system ma wyświetlić -> ‘logged’  Po wpisanie niepoprawnego loginu/hasła ma wyświetlić -> ‘Access denied’",
+  "description": "tiwam application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
