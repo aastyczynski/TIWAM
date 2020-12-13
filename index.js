@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const APP_PORT = 3000;
+const APP_PORT = process.env.PORT || 3000;
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
