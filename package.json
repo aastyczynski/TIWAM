@@ -4,7 +4,7 @@
   "description": "tiwam application",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon index.js",
+    "devstart": "nodemon index.js",
     "start": "node index.js"
   },
   "repository": {
