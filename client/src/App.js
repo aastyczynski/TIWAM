@@ -1,12 +1,15 @@
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <button className="Button">Login</button>
-      <button className="Button">Register</button>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <button className="Button">Login</button>
+        <button className="Button">Register</button>
+      </div>
+    );
+  }
 }
 
 export default App;

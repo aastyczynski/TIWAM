@@ -5,11 +5,11 @@
     "imie" : "Adam",
     "nazwisko" : "Styczynski",
     "pesel" : "1234567",
-    "adres_zamieszkania" : {
+    "adres_zamieszkania" : [{
         "ulica" : "Ulica",
         "kod_pocztowy" : "80-130",
         "miejscowosc" : "Gdansk",
         "kraj" : "Polska"
-    },
+    }],
     "wiek": "23"
 }
