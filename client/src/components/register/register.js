@@ -12,12 +12,14 @@ class register extends Component {
       imie: "",
       nazwisko: "",
       pesel: "",
-      adres_zamieszkania: {
-        ulica: "",
-        kod_pocztowy: "",
-        miejscowosc: "",
-        kraj: "",
-      },
+      adres_zamieszkania: [
+        {
+          ulica: "",
+          kod_pocztowy: "",
+          miejscowosc: "",
+          kraj: "",
+        },
+      ],
       wiek: "",
     };
     this.changeUserName = this.changeUserName.bind(this);
