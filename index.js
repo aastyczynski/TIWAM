@@ -1,26 +1,29 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
 const APP_PORT = process.env.PORT || 5000;
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const authRoute = require('./routes/auth');
-const postRoute = require('./routes/post');
-const rootRoute = require('./routes/root');
-
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const authRoute = require("./routes/auth");
+const postRoute = require("./routes/post");
+const rootRoute = require("./routes/root");
 
 dotenv.config();
 
+mongoose.connect(
+  process.env.DB_CONNECT,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to db!");
+  }
+);
 
-mongoose.connect(process.env.DB_CONNECT,{useNewUrlParser: true, useUnifiedTopology: true },() =>{
-    console.log('Connected to db!')
-});
-
-
+app.use(cors());
 app.use(express.json());
-app.use('/api/user', authRoute);
-app.use('/api/post', postRoute);
-app.use('/',rootRoute);
+app.use("/api/user", authRoute);
+app.use("/api/post", postRoute);
+app.use("/", rootRoute);
 
 app.listen(APP_PORT, () => {
-    console.log(`Server is running at port ${APP_PORT}`)
+  console.log(`Server is running at port ${APP_PORT}`);
 });
