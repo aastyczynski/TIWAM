@@ -1,127 +1,73 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "./register.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
-class register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      nazwa_uzytkownika: "",
-      email: "",
-      haslo: "",
-      imie: "",
-      nazwisko: "",
-      pesel: "",
-      ulica: "",
-      kod_pocztowy: "",
-      miejscowosc: "",
-      kraj: "",
-      wiek: "",
-    };
-    this.changeUserName = this.changeUserName.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.changePass = this.changePass.bind(this);
-    this.changeName = this.changeName.bind(this);
-    this.changeSurname = this.changeSurname.bind(this);
-    this.changePesel = this.changePesel.bind(this);
-    this.changeStreet = this.changeStreet.bind(this);
-    this.changePostcode = this.changePostcode.bind(this);
-    this.changeCity = this.changeCity.bind(this);
-    this.changeCountry = this.changeCountry.bind(this);
-    this.changeAge = this.changeAge.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  changeUserName(event) {
-    this.setState({
-      nazwa_uzytkownika: event.target.value,
-    });
-  }
-  changeEmail(event) {
-    this.setState({
-      email: event.target.value,
-    });
-  }
-  changePass(event) {
-    this.setState({
-      haslo: event.target.value,
-    });
-  }
-  changeName(event) {
-    this.setState({
-      imie: event.target.value,
-    });
-  }
-  changeSurname(event) {
-    this.setState({
-      nazwisko: event.target.value,
-    });
-  }
-  changePesel(event) {
-    this.setState({
-      pesel: event.target.value,
-    });
-  }
-  changeStreet(event) {
-    this.setState({
-      ulica: event.target.value,
-    });
-  }
-  changePostcode(event) {
-    this.setState({
-      kod_pocztowy: event.target.value,
-    });
-  }
-  changeCity(event) {
-    this.setState({
-      miejscowosc: event.target.value,
-    });
-  }
-  changeCountry(event) {
-    this.setState({
-      kraj: event.target.value,
-    });
-  }
-  changeAge(event) {
-    this.setState({
-      wiek: event.target.value,
-    });
-  }
+function Register({ showMain }) {
+  const [user, changeUser] = useState({
+    nazwa_uzytkownika: "",
+    email: "",
+    haslo: "",
+    imie: "",
+    nazwisko: "",
+    pesel: "",
+    ulica: "",
+    kod_pocztowy: "",
+    miejscowosc: "",
+    kraj: "",
+    wiek: "",
+  });
 
-  onSubmit(event) {
+  const changeUserName = (event) => {
+    changeUser({ ...user, nazwa_uzytkownika: event.target.value });
+  };
+  const changeEmail = (event) => {
+    changeUser({ ...user, email: event.target.value });
+  };
+  const changePass = (event) => {
+    changeUser({ ...user, haslo: event.target.value });
+  };
+  const changeName = (event) => {
+    changeUser({ ...user, imie: event.target.value });
+  };
+  const changeSurname = (event) => {
+    changeUser({ ...user, nazwisko: event.target.value });
+  };
+  const changePesel = (event) => {
+    changeUser({ ...user, pesel: event.target.value });
+  };
+  const changeStreet = (event) => {
+    changeUser({ ...user, ulica: event.target.value });
+  };
+  const changePostcode = (event) => {
+    changeUser({ ...user, kod_pocztowy: event.target.value });
+  };
+  const changeCity = (event) => {
+    changeUser({ ...user, miejscowosc: event.target.value });
+  };
+  const changeCountry = (event) => {
+    changeUser({ ...user, kraj: event.target.value });
+  };
+  const changeAge = (event) => {
+    changeUser({ ...user, wiek: event.target.value });
+  };
+
+  const onSubmit = (event) => {
     event.preventDefault();
-    // const test = {
-    //   nazwa_uzytkownika: "admin",
-    //   email: "admin@test.com",
-    //   haslo: "admin",
-    //   imie: "Adam",
-    //   nazwisko: "Styczynski",
-    //   pesel: "1234567",
-    //   adres_zamieszkania: [
-    //     {
-    //       ulica: "Ulica",
-    //       kod_pocztowy: "80-130",
-    //       miejscowosc: "Gdansk",
-    //       kraj: "Polska",
-    //     },
-    //   ],
-    //   wiek: "23",
-    // };
-
     const registered = {
-      nazwa_uzytkownika: this.state.nazwa_uzytkownika,
-      email: this.state.email,
-      haslo: this.state.haslo,
-      imie: this.state.imie,
-      nazwisko: this.state.nazwisko,
-      pesel: this.state.pesel,
+      nazwa_uzytkownika: user.nazwa_uzytkownika,
+      email: user.email,
+      haslo: user.haslo,
+      imie: user.imie,
+      nazwisko: user.nazwisko,
+      pesel: user.pesel,
       adres_zamieszkania: {
-        ulica: this.state.ulica,
-        kod_pocztowy: this.state.kod_pocztowy,
-        miejscowosc: this.state.miejscowosc,
-        kraj: this.state.kraj,
+        ulica: user.ulica,
+        kod_pocztowy: user.kod_pocztowy,
+        miejscowosc: user.miejscowosc,
+        kraj: user.kraj,
       },
-      wiek: this.state.wiek,
+      wiek: user.wiek,
     };
     console.log(registered);
 
@@ -129,12 +75,14 @@ class register extends Component {
       .post("http://localhost:5000/api/user/register", registered)
       .then((response) => {
         console.log(response.data);
+        alert("Registration successful!");
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response);
+        alert("Registration faild !");
       });
 
-    this.setState({
+    changeUser({
       nazwa_uzytkownika: "",
       email: "",
       haslo: "",
@@ -147,101 +95,105 @@ class register extends Component {
       kraj: "",
       wiek: "",
     });
-  }
+  };
 
-  render() {
-    return (
-      <div className="container">
-        <div className="form-div">
-          <form onSubmit={this.onSubmit}>
-            <input
-              type="text"
-              placeholder="Nazwa uzytkownika"
-              onChange={this.changeUserName}
-              value={this.state.nazwa_uzytkownika}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              onChange={this.changeEmail}
-              value={this.state.email}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Haslo"
-              onChange={this.changePass}
-              value={this.state.haslo}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Imie"
-              onChange={this.changeName}
-              value={this.state.imie}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Nazwisko"
-              onChange={this.changeSurname}
-              value={this.state.nazwisko}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Pesel"
-              onChange={this.changePesel}
-              value={this.state.pesel}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Ulica"
-              onChange={this.changeStreet}
-              value={this.state.ulica}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Kod Pocztowy"
-              onChange={this.changePostcode}
-              value={this.state.kod_pocztowy}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Miejscowosc"
-              onChange={this.changeCity}
-              value={this.state.miejscowosc}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Kraj"
-              onChange={this.changeCountry}
-              value={this.state.kraj}
-              className="form-control form-group"
-            />
-            <input
-              type="text"
-              placeholder="Wiek"
-              onChange={this.changeAge}
-              value={this.state.wiek}
-              className="form-control form-group"
-            />
+  const Back = (event) => {
+    event.preventDefault();
+    showMain();
+  };
 
-            <input
-              type="submit"
-              className="btn btn-danger btn-block"
-              value="Submit"
-            />
-          </form>
-        </div>
+  return (
+    <div className="container">
+      <div className="form-div">
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            placeholder="Nazwa uzytkownika"
+            onChange={changeUserName}
+            value={user.nazwa_uzytkownika}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={changeEmail}
+            value={user.email}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Haslo"
+            onChange={changePass}
+            value={user.haslo}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Imie"
+            onChange={changeName}
+            value={user.imie}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Nazwisko"
+            onChange={changeSurname}
+            value={user.nazwisko}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Pesel"
+            onChange={changePesel}
+            value={user.pesel}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Ulica"
+            onChange={changeStreet}
+            value={user.ulica}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Kod Pocztowy"
+            onChange={changePostcode}
+            value={user.kod_pocztowy}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Miejscowosc"
+            onChange={changeCity}
+            value={user.miejscowosc}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Kraj"
+            onChange={changeCountry}
+            value={user.kraj}
+            className="form-control form-group"
+          />
+          <input
+            type="text"
+            placeholder="Wiek"
+            onChange={changeAge}
+            value={user.wiek}
+            className="form-control form-group"
+          />
+
+          <input
+            type="submit"
+            className="btn btn-danger btn-block"
+            value="Submit"
+          />
+          <button onClick={Back}>Back</button>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default register;
+export default Register;

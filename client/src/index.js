@@ -9,7 +9,6 @@ import Login from "./components/login/login";
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Register />
   </React.StrictMode>,
   document.getElementById("root")
 );
