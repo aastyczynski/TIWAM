@@ -2,12 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Register from "./components/register/register";
+
 import reportWebVitals from "./reportWebVitals";
-import Login from "./components/login/login";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode enabled={false}>
     <App />
   </React.StrictMode>,
   document.getElementById("root")

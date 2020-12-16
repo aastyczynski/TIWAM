@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "./register.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -75,11 +75,11 @@ function Register({ showMain }) {
       .post("http://localhost:5000/api/user/register", registered)
       .then((response) => {
         console.log(response.data);
-        alert("Registration successful!");
+        alert(`Registration successfull: ${response.data}`);
       })
       .catch((error) => {
-        console.log(error.response);
-        alert("Registration faild !");
+        console.log(error.response.data);
+        alert(`Registration failed: ${error.response.data}!`);
       });
 
     changeUser({
@@ -189,7 +189,9 @@ function Register({ showMain }) {
             className="btn btn-danger btn-block"
             value="Submit"
           />
-          <button onClick={Back}>Back</button>
+          <button className="btn btn-warning btn-block" onClick={Back}>
+            Back
+          </button>
         </form>
       </div>
     </div>

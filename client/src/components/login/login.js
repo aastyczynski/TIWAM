@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
@@ -34,13 +34,13 @@ function Login({ showMain, showLogged }) {
       .then((response) => {
         console.log("Response:");
         console.log(response.data);
-        alert("Logged in !");
+        alert(`Login successfull: ${response.data}`);
         showLogged();
       })
       .catch((error) => {
-        console.log("Eror:");
-        console.log(error.response);
-        alert("Wrong username or password !");
+        console.log("Error:");
+        console.log(error.response.data);
+        alert(`Login failed: ${error.response.data}`);
       });
 
     changeUser({
@@ -82,7 +82,9 @@ function Login({ showMain, showLogged }) {
             className="btn btn-danger btn-block"
             value="Submit"
           />
-          <button onClick={Back}>Back</button>
+          <button className="btn btn-warning btn-block" onClick={Back}>
+            Back
+          </button>
         </form>
       </div>
     </div>

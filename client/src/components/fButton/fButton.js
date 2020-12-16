@@ -1,5 +1,4 @@
-import e from "cors";
-import React, { Component, useState } from "react";
+import React from "react";
 
 function fButton({ showLogin, showRegister }) {
   const onClickLogin = (event) => {
@@ -14,8 +13,14 @@ function fButton({ showLogin, showRegister }) {
 
   return (
     <div className="container">
-      <button onClick={onClickLogin}>Login</button>
-      <button onClick={onClickRegister}>Register</button>
+      <div className="form-div">
+        <button className="btn btn-warning btn-block" onClick={onClickLogin}>
+          Login
+        </button>
+        <button className="btn btn-warning btn-block" onClick={onClickRegister}>
+          Register
+        </button>
+      </div>
     </div>
   );
 }

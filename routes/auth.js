@@ -56,11 +56,11 @@ router.post("/login", async (req, res) => {
 
   //Password checking
   const validPass = await bcrypt.compare(req.body.haslo, user.haslo);
-  if (!validPass) return res.status(400).send("Invalid passowrd");
+  if (!validPass) return res.status(400).send("Invalid password");
 
   //Create token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header("auth-token", token).send(token);
+  //res.header("auth-token", token).send(token);
 
   res.send("Logged in!");
 });
