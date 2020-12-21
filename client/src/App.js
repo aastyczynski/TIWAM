@@ -15,6 +15,8 @@ function App() {
     isLogged: false,
   });
 
+  const [userInfo, setInfo] = useState();
+
   const showLogin = () => {
     setPage({
       isLogin: true,
@@ -47,16 +49,24 @@ function App() {
     });
   };
 
+  const updateUser = (user) => {
+    setInfo(user);
+  };
+
   return (
     <div className="App">
       {!page.isLogin & !page.isRegister & !page.isLogged ? (
         <FButton showLogin={showLogin} showRegister={showRegister} />
       ) : page.isLogin ? (
-        <Login showMain={showMain} showLogged={showLogged} />
+        <Login
+          showMain={showMain}
+          showLogged={showLogged}
+          updateUser={updateUser}
+        />
       ) : page.isRegister ? (
         <Register showMain={showMain} />
       ) : page.isLogged ? (
-        <Logged showMain={showMain} />
+        <Logged showMain={showMain} userInfo={userInfo} />
       ) : (
         <App />
       )}

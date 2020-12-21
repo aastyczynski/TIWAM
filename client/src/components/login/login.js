@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
-function Login({ showMain, showLogged }) {
+function Login({ showMain, showLogged, updateUser }) {
   const [user, changeUser] = useState({
     nazwa_uzytkownia: "",
     haslo: "",
@@ -34,12 +34,13 @@ function Login({ showMain, showLogged }) {
       .then((response) => {
         console.log("Response:");
         console.log(response.data);
-        alert(`Login successfull: ${response.data}`);
+        alert(`Login successfull: ${response.data.alert}`);
+        updateUser(response.data.user);
         showLogged();
       })
       .catch((error) => {
         console.log("Error:");
-        console.log(error.response.data);
+        console.log(error.response);
         alert(`Login failed: ${error.response.data}`);
       });
 

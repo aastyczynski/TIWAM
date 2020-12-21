@@ -78,7 +78,7 @@ function Register({ showMain }) {
         alert(`Registration successfull: ${response.data}`);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response);
         alert(`Registration failed: ${error.response.data}!`);
       });
 
